@@ -70,7 +70,7 @@ public final class CameraEngine: NSObject, ObservableObject {
     @Published public var isConfigured: Bool = false
     @Published public var permissionGranted: Bool = false
     
-    // Telemetry Readouts
+    // Telemetry Readouts (Bound live to hardware sensor feedback)
     @Published public var currentISO: Float = 100.0
     @Published public var currentShutterSpeed: Double = 0.01 // 1/100s
     @Published public var currentLensPosition: Float = 0.5
@@ -146,7 +146,6 @@ public final class CameraEngine: NSObject, ObservableObject {
     // MARK: - Hardware Device Discovery
     
     private func discoverHardwareDevices() {
-        // iPhone 12 Dual-Camera System
         let discovery = AVCaptureDevice.DiscoverySession(
             deviceTypes: [
                 .builtInWideAngleCamera,
@@ -167,7 +166,6 @@ public final class CameraEngine: NSObject, ObservableObject {
             }
         }
         
-        // Fallback for simulator or other devices
         if wideDevice == nil {
             wideDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
                 ?? AVCaptureDevice.default(for: .video)
@@ -248,7 +246,6 @@ public final class CameraEngine: NSObject, ObservableObject {
             return
         }
         
-        // Remove existing inputs
         if let currentInput = videoInput {
             captureSession.removeInput(currentInput)
         }
@@ -263,7 +260,6 @@ public final class CameraEngine: NSObject, ObservableObject {
             print("[GhostCam CameraEngine] Failed to create device input: \(error.localizedDescription)")
         }
         
-        // Video Data Output for 60fps Metal preview
         if !captureSession.outputs.contains(videoDataOutput) {
             videoDataOutput.alwaysDiscardsLateVideoFrames = true
             videoDataOutput.videoSettings = [
@@ -275,7 +271,6 @@ public final class CameraEngine: NSObject, ObservableObject {
             }
         }
         
-        // High-Resolution Photo Output
         if !captureSession.outputs.contains(photoOutput) {
             photoOutput.isHighResolutionCaptureEnabled = true
             photoOutput.maxPhotoQualityPrioritization = .quality
@@ -330,15 +325,14 @@ public final class CameraEngine: NSObject, ObservableObject {
             DispatchQueue.main.async {
                 self.activeLens = lens
                 self.updateHardwareRanges()
-                // Reset manual locks when switching physical sensor
                 self.resetAllToAuto()
             }
         }
     }
     
-    // MARK: - Real-Time Manual Pro Controls
+    // MARK: - Real-Time Manual Pro Controls (Direct Hardware Binding)
     
-    /// Set ISO manually (ISO slider)
+    /// Set ISO manually with real-time hardware locking
     public func setManualISO(_ iso: Float) {
         guard let device = activeDevice else { return }
         sessionQueue.async {
@@ -361,7 +355,7 @@ public final class CameraEngine: NSObject, ObservableObject {
         }
     }
     
-    /// Set Shutter Speed manually (Exposure Duration slider)
+    /// Set Shutter Speed manually with microsecond hardware duration locking
     public func setManualShutterSpeed(_ seconds: Double) {
         guard let device = activeDevice else { return }
         sessionQueue.async {
@@ -372,10 +366,10 @@ public final class CameraEngine: NSObject, ObservableObject {
                 let minSec = CMTimeGetSeconds(device.activeFormat.minExposureDuration)
                 let maxSec = CMTimeGetSeconds(device.activeFormat.maxExposureDuration)
                 let clampedSec = min(max(seconds, minSec), maxSec)
-                let clampedDuration = CMTimeMakeWithSeconds(clampedSec, preferredTimescale: 1_000_000)
+                let targetDuration = CMTimeMakeWithSeconds(clampedSec, preferredTimescale: 1_000_000)
                 let currentISO = device.iso
                 
-                device.setExposureModeCustom(duration: clampedDuration, iso: currentISO, completionHandler: nil)
+                device.setExposureModeCustom(duration: targetDuration, iso: currentISO, completionHandler: nil)
                 
                 DispatchQueue.main.async {
                     self.isManualShutter = true
@@ -387,7 +381,7 @@ public final class CameraEngine: NSObject, ObservableObject {
         }
     }
     
-    /// Set Manual Focus (Lens Position 0.0 - 1.0)
+    /// Set Manual Focus (Lens Position 0.0 macro to 1.0 infinity)
     public func setManualFocus(lensPosition: Float) {
         guard let device = activeDevice else { return }
         sessionQueue.async {
@@ -420,7 +414,7 @@ public final class CameraEngine: NSObject, ObservableObject {
                 device.setExposureTargetBias(clampedBias, completionHandler: nil)
                 
                 DispatchQueue.main.async {
-                    self.isManualEV = (bias != 0.0)
+                    self.isManualEV = (clampedBias != 0.0)
                     self.currentEV = clampedBias
                 }
             } catch {
@@ -429,7 +423,7 @@ public final class CameraEngine: NSObject, ObservableObject {
         }
     }
     
-    /// Set Manual White Balance (Temperature in Kelvin: 2500K - 9000K, Tint: -150 to +150)
+    /// Set Manual White Balance (Temperature in Kelvin: 2500K - 8000K, Tint: -100 to +100)
     public func setManualWhiteBalance(temperature: Float, tint: Float) {
         guard let device = activeDevice else { return }
         sessionQueue.async {
@@ -437,13 +431,15 @@ public final class CameraEngine: NSObject, ObservableObject {
                 try device.lockForConfiguration()
                 defer { device.unlockForConfiguration() }
                 
+                let clampedTemp = min(max(temperature, 2500.0), 8000.0)
+                let clampedTint = min(max(tint, -100.0), 100.0)
+                
                 let tempAndTint = AVCaptureDevice.WhiteBalanceTemperatureAndTintValues(
-                    temperature: temperature,
-                    tint: tint
+                    temperature: clampedTemp,
+                    tint: clampedTint
                 )
                 var gains = device.deviceWhiteBalanceGains(for: tempAndTint)
                 
-                // Vital: Gains must be clamped to [1.0, maxWhiteBalanceGain] to prevent Obj-C exceptions
                 let maxGain = device.maxWhiteBalanceGain
                 gains.redGain = min(max(gains.redGain, 1.0), maxGain)
                 gains.greenGain = min(max(gains.greenGain, 1.0), maxGain)
@@ -453,8 +449,8 @@ public final class CameraEngine: NSObject, ObservableObject {
                 
                 DispatchQueue.main.async {
                     self.isManualWB = true
-                    self.currentWhiteBalanceTemp = temperature
-                    self.currentWhiteBalanceTint = tint
+                    self.currentWhiteBalanceTemp = clampedTemp
+                    self.currentWhiteBalanceTint = clampedTint
                 }
             } catch {
                 print("[GhostCam CameraEngine] White Balance lock error: \(error.localizedDescription)")
@@ -529,9 +525,37 @@ public final class CameraEngine: NSObject, ObservableObject {
     }
     
     public func resetAllToAuto() {
-        resetExposureToAuto()
-        resetFocusToAuto()
-        resetWhiteBalanceToAuto()
+        guard let device = activeDevice else { return }
+        sessionQueue.async {
+            do {
+                try device.lockForConfiguration()
+                defer { device.unlockForConfiguration() }
+                
+                if device.isExposureModeSupported(.continuousAutoExposure) {
+                    device.exposureMode = .continuousAutoExposure
+                }
+                device.setExposureTargetBias(0.0, completionHandler: nil)
+                
+                if device.isFocusModeSupported(.continuousAutoFocus) {
+                    device.focusMode = .continuousAutoFocus
+                }
+                
+                if device.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance) {
+                    device.whiteBalanceMode = .continuousAutoWhiteBalance
+                }
+                
+                DispatchQueue.main.async {
+                    self.isManualISO = false
+                    self.isManualShutter = false
+                    self.isManualEV = false
+                    self.isManualFocus = false
+                    self.isManualWB = false
+                    self.currentEV = 0.0
+                }
+            } catch {
+                print("[GhostCam CameraEngine] Reset all error: \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: - Tap To Focus & Expose
@@ -563,7 +587,6 @@ public final class CameraEngine: NSObject, ObservableObject {
                     self.showFocusReticle = true
                     self.isManualFocus = false
                     
-                    // Auto-hide reticle after 2 seconds
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         self.showFocusReticle = false
                     }
@@ -574,7 +597,7 @@ public final class CameraEngine: NSObject, ObservableObject {
         }
     }
     
-    // MARK: - Telemetry Polling Monitor
+    // MARK: - Telemetry Polling Monitor (Real-time live sensor feedback)
     
     private func startTelemetryMonitor() {
         telemetryTimer = Timer.publish(every: 0.1, on: .main, in: .common)
@@ -592,22 +615,18 @@ public final class CameraEngine: NSObject, ObservableObject {
     private func pollHardwareTelemetry() {
         guard let device = activeDevice else { return }
         
-        if !isManualISO {
-            self.currentISO = device.iso
-        }
-        if !isManualShutter {
-            self.currentShutterSpeed = CMTimeGetSeconds(device.exposureDuration)
-        }
-        if !isManualFocus {
-            self.currentLensPosition = device.lensPosition
-        }
+        // Continuous live feedback from real hardware device
+        self.currentISO = device.iso
+        self.currentShutterSpeed = CMTimeGetSeconds(device.exposureDuration)
+        self.currentLensPosition = device.lensPosition
+        self.currentEV = device.exposureTargetBias
+        
+        let gains = device.deviceWhiteBalanceGains
+        let tempAndTint = device.temperatureAndTintValues(for: gains)
         if !isManualWB {
-            let gains = device.deviceWhiteBalanceGains
-            let tempAndTint = device.temperatureAndTintValues(for: gains)
             self.currentWhiteBalanceTemp = tempAndTint.temperature
             self.currentWhiteBalanceTint = tempAndTint.tint
         }
-        self.currentEV = device.exposureTargetBias
     }
     
     // MARK: - Capture Execution
@@ -623,7 +642,6 @@ public final class CameraEngine: NSObject, ObservableObject {
     private func captureSinglePhoto() {
         var photoSettings: AVCapturePhotoSettings
         
-        // Handle RAW capture vs HEIF/JPEG
         if captureFormat == .rawDNG {
             if let rawFormat = photoOutput.availableRawPhotoPixelFormatTypes.first {
                 let processedFormat: [String: Any] = [
@@ -658,10 +676,9 @@ public final class CameraEngine: NSObject, ObservableObject {
         DispatchQueue.main.async {
             self.isBurstCapturing = true
             self.processingProgress = 0.05
-            self.processingStatus = "Capturing \(self.superResMode.frameBurstCount) Rapid Burst Frames..."
+            self.processingStatus = "Capturing \(self.superResMode.frameBurstCount) Burst Frames..."
         }
         
-        // Trigger rapid burst sequence
         captureNextBurstFrame()
     }
     
@@ -675,7 +692,7 @@ public final class CameraEngine: NSObject, ObservableObject {
             return
         }
         
-        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg.rawValue])
         settings.isHighResolutionPhotoEnabled = true
         photoOutput.capturePhoto(with: settings, delegate: self)
     }
@@ -737,7 +754,7 @@ extension CameraEngine: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
-// MARK: - AVCapturePhotoCaptureDelegate
+// MARK: - AVCapturePhotoCaptureDelegate (Orientation-Normalized Ingestion)
 
 extension CameraEngine: AVCapturePhotoCaptureDelegate {
     public func photoOutput(
@@ -752,40 +769,49 @@ extension CameraEngine: AVCapturePhotoCaptureDelegate {
         
         guard let photoData = photo.fileDataRepresentation() else { return }
         
+        // Normalize orientation immediately so frames are ALWAYS upright
+        var normalizedCIImage: CIImage?
+        if let orientationNumber = photo.metadata[String(kCGImagePropertyOrientation)] as? UInt32,
+           let cgOrientation = CGImagePropertyOrientation(rawValue: orientationNumber),
+           let baseCI = CIImage(data: photoData) {
+            normalizedCIImage = baseCI.oriented(cgOrientation)
+        } else {
+            normalizedCIImage = CIImage(data: photoData, options: [CIImageOption.applyOrientationProperty: true])
+        }
+        
+        guard let uprightCIImage = normalizedCIImage else { return }
+        
         // Burst Mode Accumulation for Super-Resolution
         if isBurstCapturing {
-            if let ciImage = CIImage(data: photoData) {
-                burstLock.lock()
-                burstCapturedFrames.append(ciImage)
-                let currentCount = burstCapturedFrames.count
-                burstLock.unlock()
-                
-                DispatchQueue.main.async {
-                    self.processingProgress = 0.05 + 0.10 * (Double(currentCount) / Double(self.burstExpectedCount))
-                }
-                
-                // Immediately queue next burst frame with zero shutter lag
-                if currentCount < burstExpectedCount {
-                    self.captureNextBurstFrame()
-                } else {
-                    self.processCompletedBurst()
-                }
+            burstLock.lock()
+            burstCapturedFrames.append(uprightCIImage)
+            let currentCount = burstCapturedFrames.count
+            burstLock.unlock()
+            
+            DispatchQueue.main.async {
+                self.processingProgress = 0.05 + 0.10 * (Double(currentCount) / Double(self.burstExpectedCount))
+            }
+            
+            if currentCount < burstExpectedCount {
+                self.captureNextBurstFrame()
+            } else {
+                self.processCompletedBurst()
             }
             return
         }
         
         // Single Photo Processing
-        processSingleCapturedPhoto(photoData: photoData, photo: photo)
+        processSingleCapturedPhoto(uprightImage: uprightCIImage, photoData: photoData)
     }
     
-    private func processSingleCapturedPhoto(photoData: Data, photo: AVCapturePhoto) {
-        guard var ciImage = CIImage(data: photoData) else { return }
+    private func processSingleCapturedPhoto(uprightImage: CIImage, photoData: Data) {
+        var styledImage = uprightImage
         
         // Apply Film Look if not RAW
         if captureFormat != .rawDNG {
-            ciImage = FilmSimulationEngine.shared.apply(
+            styledImage = FilmSimulationEngine.shared.apply(
                 filter: selectedFilmLook,
-                to: ciImage,
+                to: uprightImage,
                 addDateStamp: (selectedFilmLook == .digicam90s)
             )
         }
@@ -798,13 +824,12 @@ extension CameraEngine: AVCapturePhotoCaptureDelegate {
         
         do {
             try ciContext.writeJPEGRepresentation(
-                of: ciImage,
+                of: styledImage,
                 to: tempURL,
                 colorSpace: colorSpace,
                 options: [kCGImageDestinationLossyCompressionQuality as CIImageRepresentationOption: 0.95]
             )
             
-            // Save to Photos
             var assetId: String?
             let semaphore = DispatchSemaphore(value: 0)
             PHPhotoLibrary.shared().performChanges({
@@ -817,8 +842,7 @@ extension CameraEngine: AVCapturePhotoCaptureDelegate {
             
             try? FileManager.default.removeItem(at: tempURL)
             
-            // Update UI
-            let extent = ciImage.extent
+            let extent = styledImage.extent
             let thumbImage = UIImage(data: photoData) ?? UIImage()
             
             DispatchQueue.main.async {

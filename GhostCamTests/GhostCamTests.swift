@@ -8,24 +8,35 @@ final class GhostCamTests: XCTestCase {
     // MARK: - SuperResEngine Dimension & Mathematical Verification
     
     func testSuperResModeDimensions() {
-        // Verify Native Sensor Dimensions
+        // Verify Native Sensor Dimensions (Landscape)
         let offDimensions = SuperResMode.off.targetDimensions
         XCTAssertEqual(offDimensions.width, 4032, "Native width should match iPhone 12 sensor (4032)")
         XCTAssertEqual(offDimensions.height, 3024, "Native height should match iPhone 12 sensor (3024)")
         XCTAssertEqual(SuperResMode.off.frameBurstCount, 1, "Native mode should capture 1 frame")
         
-        // Verify 48MP High-Fidelity Dimensions
+        // Verify Native Sensor Dimensions (Portrait)
+        let offPortrait = SuperResMode.off.targetDimensions(isPortrait: true)
+        XCTAssertEqual(offPortrait.width, 3024)
+        XCTAssertEqual(offPortrait.height, 4032)
+        
+        // Verify 48MP High-Fidelity Dimensions (Landscape & Portrait)
         let res48Dimensions = SuperResMode.res48MP.targetDimensions
         XCTAssertEqual(res48Dimensions.width, 8000, "48MP mode width should be 8000")
         XCTAssertEqual(res48Dimensions.height, 6000, "48MP mode height should be 6000")
+        let res48Portrait = SuperResMode.res48MP.targetDimensions(isPortrait: true)
+        XCTAssertEqual(res48Portrait.width, 6000)
+        XCTAssertEqual(res48Portrait.height, 8000)
         let megapixels48 = Double(res48Dimensions.width * res48Dimensions.height) / 1_000_000.0
         XCTAssertEqual(megapixels48, 48.0, accuracy: 0.1, "48MP mode should produce 48.0 Megapixels")
         XCTAssertEqual(SuperResMode.res48MP.frameBurstCount, 6, "48MP mode should burst 6 frames")
         
-        // Verify 90MP Ultra-Resolution Dimensions
+        // Verify 90MP Ultra-Resolution Dimensions (Landscape & Portrait)
         let res90Dimensions = SuperResMode.res90MP.targetDimensions
         XCTAssertEqual(res90Dimensions.width, 10954, "90MP mode width must be 10954")
         XCTAssertEqual(res90Dimensions.height, 8216, "90MP mode height must be 8216")
+        let res90Portrait = SuperResMode.res90MP.targetDimensions(isPortrait: true)
+        XCTAssertEqual(res90Portrait.width, 8216, "90MP portrait width must be 8216")
+        XCTAssertEqual(res90Portrait.height, 10954, "90MP portrait height must be 10954")
         let megapixels90 = Double(res90Dimensions.width * res90Dimensions.height) / 1_000_000.0
         XCTAssertEqual(megapixels90, 90.0, accuracy: 0.1, "90MP mode should produce 90.0 Megapixels")
         XCTAssertEqual(SuperResMode.res90MP.frameBurstCount, 8, "90MP mode should burst 8 frames")
