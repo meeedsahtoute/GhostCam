@@ -14,7 +14,7 @@ public final class MotionManager: ObservableObject {
     
     private var wasLevel: Bool = false
     
-    init() {
+    public init() {
         startMotionUpdates()
     }
     

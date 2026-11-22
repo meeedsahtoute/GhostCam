@@ -203,8 +203,12 @@ public struct QuickPreviewModal: View {
 }
 
 public struct ActivityView: UIViewControllerRepresentable {
-    let activityItems: [Any]
-    let applicationActivities: [UIActivity]? = nil
+    public let activityItems: [Any]
+    public let applicationActivities: [UIActivity]? = nil
+    
+    public init(activityItems: [Any]) {
+        self.activityItems = activityItems
+    }
     
     public func makeUIViewController(context: Context) -> UIActivityViewController {
         UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)

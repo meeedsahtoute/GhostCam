@@ -304,7 +304,7 @@ public final class SuperResEngine {
     // MARK: - Frame Alignment using Vision
     
     private func alignFrame(_ target: CIImage, to reference: CIImage) -> CIImage {
-        let request = VNTranslationalImageRegistrationRequest(targetedCIImage: target)
+        let request = VNTranslationalImageRegistrationRequest(targetedCIImage: target, completionHandler: nil)
         let handler = VNImageRequestHandler(ciImage: reference, options: [:])
         
         do {

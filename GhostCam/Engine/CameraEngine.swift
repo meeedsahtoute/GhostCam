@@ -368,18 +368,17 @@ public final class CameraEngine: NSObject, ObservableObject {
                 try device.lockForConfiguration()
                 defer { device.unlockForConfiguration() }
                 
-                let targetDuration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 1_000_000)
-                let clampedDuration = CMTimeClampToRange(
-                    targetDuration,
-                    range: CMTimeRange(start: device.activeFormat.minExposureDuration, end: device.activeFormat.maxExposureDuration)
-                )
+                let minSec = CMTimeGetSeconds(device.activeFormat.minExposureDuration)
+                let maxSec = CMTimeGetSeconds(device.activeFormat.maxExposureDuration)
+                let clampedSec = min(max(seconds, minSec), maxSec)
+                let clampedDuration = CMTimeMakeWithSeconds(clampedSec, preferredTimescale: 1_000_000)
                 let currentISO = device.iso
                 
                 device.setExposureModeCustom(duration: clampedDuration, iso: currentISO, completionHandler: nil)
                 
                 DispatchQueue.main.async {
                     self.isManualShutter = true
-                    self.currentShutterSpeed = CMTimeGetSeconds(clampedDuration)
+                    self.currentShutterSpeed = clampedSec
                 }
             } catch {
                 print("[GhostCam CameraEngine] Shutter lock error: \(error.localizedDescription)")

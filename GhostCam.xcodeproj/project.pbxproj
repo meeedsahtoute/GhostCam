@@ -38,24 +38,24 @@
 /* Begin PBXFileReference section */
 		P10000000000000000000001 /* GhostCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		P10000000000000000000002 /* GhostCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhostCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F100000000000000000003E9 /* GhostCamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/App/GhostCamApp.swift"; sourceTree = "<group>"; };
-		F100000000000000000003EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GhostCam/App/Info.plist"; sourceTree = "<group>"; };
-		F100000000000000000003EC /* CameraEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/CameraEngine.swift"; sourceTree = "<group>"; };
-		F100000000000000000003EE /* SuperResEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/SuperResEngine.swift"; sourceTree = "<group>"; };
-		F100000000000000000003F0 /* FilmSimulationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/FilmSimulationEngine.swift"; sourceTree = "<group>"; };
-		F100000000000000000003F2 /* MetalPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/MetalPreviewView.swift"; sourceTree = "<group>"; };
-		F100000000000000000003F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/ContentView.swift"; sourceTree = "<group>"; };
-		F100000000000000000003F6 /* TopReadoutBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/TopReadoutBar.swift"; sourceTree = "<group>"; };
-		F100000000000000000003F8 /* ManualControlsWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/ManualControlsWheel.swift"; sourceTree = "<group>"; };
-		F100000000000000000003FA /* HorizonLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/HorizonLevelView.swift"; sourceTree = "<group>"; };
-		F100000000000000000003FC /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/GridOverlayView.swift"; sourceTree = "<group>"; };
-		F100000000000000000003FE /* QuickPreviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/QuickPreviewModal.swift"; sourceTree = "<group>"; };
-		F10000000000000000000400 /* FilmLookSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/FilmLookSelectorView.swift"; sourceTree = "<group>"; };
-		F10000000000000000000402 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Helpers/MotionManager.swift"; sourceTree = "<group>"; };
-		F10000000000000000000404 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Helpers/HapticsManager.swift"; sourceTree = "<group>"; };
-		F10000000000000000000406 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "GhostCam/Resources/Assets.xcassets"; sourceTree = "<group>"; };
-		F10000000000000000000408 /* GhostCamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCamTests/GhostCamTests.swift"; sourceTree = "<group>"; };
-		F1000000000000000000040A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GhostCamTests/Info.plist"; sourceTree = "<group>"; };
+		F100000000000000000003E9 /* GhostCamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/App/GhostCamApp.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GhostCam/App/Info.plist"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003EC /* CameraEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/CameraEngine.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003EE /* SuperResEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/SuperResEngine.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003F0 /* FilmSimulationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/FilmSimulationEngine.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003F2 /* MetalPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/MetalPreviewView.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/ContentView.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003F6 /* TopReadoutBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/TopReadoutBar.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003F8 /* ManualControlsWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/ManualControlsWheel.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003FA /* HorizonLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/HorizonLevelView.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003FC /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/GridOverlayView.swift"; sourceTree = SOURCE_ROOT; };
+		F100000000000000000003FE /* QuickPreviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/QuickPreviewModal.swift"; sourceTree = SOURCE_ROOT; };
+		F10000000000000000000400 /* FilmLookSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/FilmLookSelectorView.swift"; sourceTree = SOURCE_ROOT; };
+		F10000000000000000000402 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Helpers/MotionManager.swift"; sourceTree = SOURCE_ROOT; };
+		F10000000000000000000404 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Helpers/HapticsManager.swift"; sourceTree = SOURCE_ROOT; };
+		F10000000000000000000406 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "GhostCam/Resources/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		F10000000000000000000408 /* GhostCamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCamTests/GhostCamTests.swift"; sourceTree = SOURCE_ROOT; };
+		F1000000000000000000040A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GhostCamTests/Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,10 +303,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				AD_HOC_CODE_SIGNING_ALLOWED = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -327,10 +328,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				AD_HOC_CODE_SIGNING_ALLOWED = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -390,8 +392,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C10000000000000000000000 /* Build configuration list for PBXProject "GhostCam" */;
-		C10000000000000000000000 = {
+		C10000000000000000000000 /* Build configuration list for PBXProject "GhostCam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C10000000000000000000001 /* Debug */,
