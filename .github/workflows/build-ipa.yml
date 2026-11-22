@@ -2,83 +2,45 @@ name: Build Unsigned GhostCam IPA
 
 on:
   push:
-    branches: [ "main" ]
-    tags: [ "v*" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
 
-jobs:
-  build-and-test:
-    name: Test & Build Unsigned IPA for LiveContainer
-    runs-on: macos-14
+permissions:
+  contents: write
 
+jobs:
+  build-ipa:
+    runs-on: macos-latest
     steps:
-      - name: Checkout Source Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Select Xcode Version
-        run: |
-          sudo xcode-select -s /Applications/Xcode_15.4.app || sudo xcode-select -s /Applications/Xcode.app
-          xcodebuild -version
+      - name: Select latest Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer || true
 
-      - name: Run Unit Tests on Simulator
+      - name: Build unsigned GhostCam.app
         run: |
-          xcodebuild test \
-            -project GhostCam.xcodeproj \
-            -scheme GhostCamTests \
-            -destination "platform=iOS Simulator,name=iPhone 15,OS=latest" \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
-            COMPILER_INDEX_STORE_ENABLE=NO
-
-      - name: Build Unsigned iOS Release App
-        run: |
-          xcodebuild build \
+          xcodebuild \
             -project GhostCam.xcodeproj \
             -scheme GhostCam \
-            -destination "generic/platform=iOS" \
             -configuration Release \
-            -derivedDataPath build/DerivedData \
+            -sdk iphoneos \
+            -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            COMPILER_INDEX_STORE_ENABLE=NO
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            build
 
-      - name: Package Unsigned .ipa for LiveContainer / Sideloading
+      - name: Package GhostCam.ipa
         run: |
-          mkdir -p build/ipa/Payload
-          APP_PATH="build/DerivedData/Build/Products/Release-iphoneos/GhostCam.app"
-          
-          if [ -d "$APP_PATH" ]; then
-            echo "Found GhostCam.app at $APP_PATH"
-            cp -r "$APP_PATH" build/ipa/Payload/
-          else
-            echo "Error: GhostCam.app not found in Release-iphoneos!"
-            exit 1
-          fi
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/GhostCam.app Payload/
+          zip -r GhostCam.ipa Payload
 
-          cd build/ipa
-          zip -qr GhostCam.ipa Payload
-          echo "GhostCam.ipa packaged successfully."
-          ls -lh GhostCam.ipa
-
-      - name: Upload IPA Artifact
+      - name: Upload GhostCam.ipa Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GhostCam-LiveContainer-unsigned
-          path: build/ipa/GhostCam.ipa
-          retention-days: 14
-
-      - name: Create Release and Upload IPA
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: build/ipa/GhostCam.ipa
-          name: Release ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: GhostCam-unsigned-ipa
+          path: GhostCam.ipa
