@@ -1,0 +1,425 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B100000000000000000003EA /* GhostCamApp.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003E9 /* GhostCamApp.swift */; };
+		B100000000000000000003ED /* CameraEngine.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003EC /* CameraEngine.swift */; };
+		B100000000000000000003EF /* SuperResEngine.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003EE /* SuperResEngine.swift */; };
+		B100000000000000000003F1 /* FilmSimulationEngine.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003F0 /* FilmSimulationEngine.swift */; };
+		B100000000000000000003F3 /* MetalPreviewView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003F2 /* MetalPreviewView.swift */; };
+		B100000000000000000003F5 /* ContentView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003F4 /* ContentView.swift */; };
+		B100000000000000000003F7 /* TopReadoutBar.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003F6 /* TopReadoutBar.swift */; };
+		B100000000000000000003F9 /* ManualControlsWheel.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003F8 /* ManualControlsWheel.swift */; };
+		B100000000000000000003FB /* HorizonLevelView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003FA /* HorizonLevelView.swift */; };
+		B100000000000000000003FD /* GridOverlayView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003FC /* GridOverlayView.swift */; };
+		B100000000000000000003FF /* QuickPreviewModal.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F100000000000000000003FE /* QuickPreviewModal.swift */; };
+		B10000000000000000000401 /* FilmLookSelectorView.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000400 /* FilmLookSelectorView.swift */; };
+		B10000000000000000000403 /* MotionManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000402 /* MotionManager.swift */; };
+		B10000000000000000000405 /* HapticsManager.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000404 /* HapticsManager.swift */; };
+		B10000000000000000000407 /* Assets.xcassets in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000406 /* Assets.xcassets */; };
+		B10000000000000000000409 /* GhostCamTests.swift in Sources/Resources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000408 /* GhostCamTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		X10000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000000000000000000001;
+			remoteInfo = GhostCam;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		P10000000000000000000001 /* GhostCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GhostCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		P10000000000000000000002 /* GhostCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhostCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F100000000000000000003E9 /* GhostCamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/App/GhostCamApp.swift"; sourceTree = "<group>"; };
+		F100000000000000000003EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GhostCam/App/Info.plist"; sourceTree = "<group>"; };
+		F100000000000000000003EC /* CameraEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/CameraEngine.swift"; sourceTree = "<group>"; };
+		F100000000000000000003EE /* SuperResEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/SuperResEngine.swift"; sourceTree = "<group>"; };
+		F100000000000000000003F0 /* FilmSimulationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/FilmSimulationEngine.swift"; sourceTree = "<group>"; };
+		F100000000000000000003F2 /* MetalPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/Engine/MetalPreviewView.swift"; sourceTree = "<group>"; };
+		F100000000000000000003F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/ContentView.swift"; sourceTree = "<group>"; };
+		F100000000000000000003F6 /* TopReadoutBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/TopReadoutBar.swift"; sourceTree = "<group>"; };
+		F100000000000000000003F8 /* ManualControlsWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/ManualControlsWheel.swift"; sourceTree = "<group>"; };
+		F100000000000000000003FA /* HorizonLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/HorizonLevelView.swift"; sourceTree = "<group>"; };
+		F100000000000000000003FC /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/GridOverlayView.swift"; sourceTree = "<group>"; };
+		F100000000000000000003FE /* QuickPreviewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/QuickPreviewModal.swift"; sourceTree = "<group>"; };
+		F10000000000000000000400 /* FilmLookSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Components/FilmLookSelectorView.swift"; sourceTree = "<group>"; };
+		F10000000000000000000402 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Helpers/MotionManager.swift"; sourceTree = "<group>"; };
+		F10000000000000000000404 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCam/UI/Helpers/HapticsManager.swift"; sourceTree = "<group>"; };
+		F10000000000000000000406 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "GhostCam/Resources/Assets.xcassets"; sourceTree = "<group>"; };
+		F10000000000000000000408 /* GhostCamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostCamTests/GhostCamTests.swift"; sourceTree = "<group>"; };
+		F1000000000000000000040A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GhostCamTests/Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F20000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10000000000000000000000 = {
+			isa = PBXGroup;
+			children = (
+				F100000000000000000003E9 /* GhostCamApp.swift */,
+				F100000000000000000003EB /* Info.plist */,
+				F100000000000000000003EC /* CameraEngine.swift */,
+				F100000000000000000003EE /* SuperResEngine.swift */,
+				F100000000000000000003F0 /* FilmSimulationEngine.swift */,
+				F100000000000000000003F2 /* MetalPreviewView.swift */,
+				F100000000000000000003F4 /* ContentView.swift */,
+				F100000000000000000003F6 /* TopReadoutBar.swift */,
+				F100000000000000000003F8 /* ManualControlsWheel.swift */,
+				F100000000000000000003FA /* HorizonLevelView.swift */,
+				F100000000000000000003FC /* GridOverlayView.swift */,
+				F100000000000000000003FE /* QuickPreviewModal.swift */,
+				F10000000000000000000400 /* FilmLookSelectorView.swift */,
+				F10000000000000000000402 /* MotionManager.swift */,
+				F10000000000000000000404 /* HapticsManager.swift */,
+				F10000000000000000000406 /* Assets.xcassets */,
+				F10000000000000000000408 /* GhostCamTests.swift */,
+				F1000000000000000000040A /* Info.plist */,
+				G10000000000000000000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G10000000000000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				P10000000000000000000001 /* GhostCam.app */,
+				P10000000000000000000002 /* GhostCamTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000000000000000000001 /* GhostCam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C10000000000000000000001 /* Build configuration list for PBXNativeTarget "GhostCam" */;
+			buildPhases = (
+				S10000000000000000000001 /* Sources */,
+				F20000000000000000000001 /* Frameworks */,
+				R10000000000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GhostCam;
+			productName = GhostCam;
+			productReference = P10000000000000000000001 /* GhostCam.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A10000000000000000000002 /* GhostCamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C10000000000000000000002 /* Build configuration list for PBXNativeTarget "GhostCamTests" */;
+			buildPhases = (
+				S10000000000000000000002 /* Sources */,
+				F20000000000000000000002 /* Frameworks */,
+				R10000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D10000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = GhostCamTests;
+			productName = GhostCamTests;
+			productReference = P10000000000000000000002 /* GhostCamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10000000000000000000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					A10000000000000000000001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					A10000000000000000000002 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = A10000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = C10000000000000000000000 /* Build configuration list for PBXProject "GhostCam" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G10000000000000000000000;
+			productRefGroup = G10000000000000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000000000000000000001 /* GhostCam */,
+				A10000000000000000000002 /* GhostCamTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		R10000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000407 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		R10000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		S10000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B100000000000000000003EA /* GhostCamApp.swift in Sources */,
+				B100000000000000000003ED /* CameraEngine.swift in Sources */,
+				B100000000000000000003EF /* SuperResEngine.swift in Sources */,
+				B100000000000000000003F1 /* FilmSimulationEngine.swift in Sources */,
+				B100000000000000000003F3 /* MetalPreviewView.swift in Sources */,
+				B100000000000000000003F5 /* ContentView.swift in Sources */,
+				B100000000000000000003F7 /* TopReadoutBar.swift in Sources */,
+				B100000000000000000003F9 /* ManualControlsWheel.swift in Sources */,
+				B100000000000000000003FB /* HorizonLevelView.swift in Sources */,
+				B100000000000000000003FD /* GridOverlayView.swift in Sources */,
+				B100000000000000000003FF /* QuickPreviewModal.swift in Sources */,
+				B10000000000000000000401 /* FilmLookSelectorView.swift in Sources */,
+				B10000000000000000000403 /* MotionManager.swift in Sources */,
+				B10000000000000000000405 /* HapticsManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S10000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000409 /* GhostCamTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D10000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000001 /* GhostCam */;
+			targetProxy = X10000000000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C10000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C10000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = "wholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C10000000000000000000011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GhostCam/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostcam.pro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C10000000000000000000012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GhostCam/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostcam.pro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C10000000000000000000021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GhostCamTests/Info.plist;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostcam.pro.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GhostCam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GhostCam";
+			};
+			name = Debug;
+		};
+		C10000000000000000000022 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GhostCamTests/Info.plist;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostcam.pro.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GhostCam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GhostCam";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C10000000000000000000000 /* Build configuration list for PBXProject "GhostCam" */;
+		C10000000000000000000000 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C10000000000000000000001 /* Debug */,
+				C10000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C10000000000000000000001 /* Build configuration list for PBXNativeTarget "GhostCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C10000000000000000000011 /* Debug */,
+				C10000000000000000000012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C10000000000000000000002 /* Build configuration list for PBXNativeTarget "GhostCamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C10000000000000000000021 /* Debug */,
+				C10000000000000000000022 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = A10000000000000000000000 /* Project object */;
+}
