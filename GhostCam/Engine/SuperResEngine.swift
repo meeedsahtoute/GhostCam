@@ -226,7 +226,7 @@ public final class SuperResEngine {
         try autoreleasepool {
             let colorSpace = CGColorSpaceCreateDeviceRGB()
             let options: [CIImageRepresentationOption: Any] = [
-                kCGImageDestinationLossyFactor as CIImageRepresentationOption: 0.96
+                kCGImageDestinationLossyCompressionQuality as CIImageRepresentationOption: 0.96
             ]
             
             try self.ciContext.writeJPEGRepresentation(

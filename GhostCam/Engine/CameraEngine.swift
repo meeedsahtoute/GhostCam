@@ -4,6 +4,7 @@ import CoreImage
 import Photos
 import UIKit
 import Combine
+import ImageIO
 
 public enum LensType: String, CaseIterable, Identifiable {
     case ultraWide = "0.5x"
@@ -626,16 +627,16 @@ public final class CameraEngine: NSObject, ObservableObject {
         if captureFormat == .rawDNG {
             if let rawFormat = photoOutput.availableRawPhotoPixelFormatTypes.first {
                 let processedFormat: [String: Any] = [
-                    AVVideoCodecKey: AVVideoCodecType.jpeg
+                    AVVideoCodecKey: AVVideoCodecType.jpeg.rawValue
                 ]
                 photoSettings = AVCapturePhotoSettings(rawPixelFormatType: rawFormat, processedFormat: processedFormat)
             } else {
                 photoSettings = AVCapturePhotoSettings()
             }
         } else if captureFormat == .heif && photoOutput.availablePhotoCodecTypes.contains(.hevc) {
-            photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+            photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc.rawValue])
         } else {
-            photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+            photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg.rawValue])
         }
         
         if activeDevice?.hasFlash == true && flashMode != .off {
@@ -800,7 +801,7 @@ extension CameraEngine: AVCapturePhotoCaptureDelegate {
                 of: ciImage,
                 to: tempURL,
                 colorSpace: colorSpace,
-                options: [kCGImageDestinationLossyFactor as CIImageRepresentationOption: 0.95]
+                options: [kCGImageDestinationLossyCompressionQuality as CIImageRepresentationOption: 0.95]
             )
             
             // Save to Photos

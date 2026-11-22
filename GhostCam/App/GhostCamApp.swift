@@ -12,7 +12,7 @@ struct GhostCamApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark)
-                .statusBar(hidden: true)
+                .statusBarHidden(true)
         }
     }
 }

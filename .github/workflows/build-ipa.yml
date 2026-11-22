@@ -2,22 +2,22 @@ name: Build Unsigned GhostCam IPA
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - 'v*'
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build-ipa:
+  build:
     name: Build LiveContainer IPA
     runs-on: macos-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Source Code
         uses: actions/checkout@v4
 
       - name: Select Xcode Version
@@ -37,7 +37,7 @@ jobs:
       - name: Generate Xcode Project
         run: xcodegen generate
 
-      - name: Build unsigned GhostCam.app
+      - name: Build GhostCam (LiveContainer Compatible)
         run: |
           xcodebuild clean build \
             -project GhostCam.xcodeproj \
@@ -52,15 +52,17 @@ jobs:
 
       - name: Package GhostCam.ipa
         run: |
-          mkdir -p Payload
+          mkdir -p build_output/Payload
           APP_PATH=$(find derived_data -name "GhostCam.app" -type d | head -n 1)
           if [ -z "$APP_PATH" ]; then
             echo "Error: GhostCam.app not found in derived_data!"
             exit 1
           fi
           echo "Found GhostCam.app at: $APP_PATH"
-          cp -R "$APP_PATH" Payload/
-          zip -qr GhostCam.ipa Payload
+          cp -R "$APP_PATH" build_output/Payload/
+          cd build_output
+          zip -r ../GhostCam.ipa Payload
+          cd ..
           ls -lh GhostCam.ipa
 
       - name: Upload GhostCam.ipa Artifact
