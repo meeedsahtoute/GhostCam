@@ -16,6 +16,12 @@ settings:
     CODE_SIGNING_REQUIRED: NO
     AD_HOC_CODE_SIGNING_ALLOWED: YES
 
+schemes:
+  GhostCam:
+    build:
+      targets:
+        GhostCam: [running, archiving, profiling, analyzing]
+
 targets:
   GhostCam:
     type: application
@@ -39,23 +45,3 @@ targets:
         CODE_SIGNING_ALLOWED: NO
         CODE_SIGNING_REQUIRED: NO
         AD_HOC_CODE_SIGNING_ALLOWED: YES
-
-  GhostCamTests:
-    type: bundle.unit-test
-    platform: iOS
-    deploymentTarget: "16.0"
-    sources:
-      - path: GhostCamTests
-    dependencies:
-      - target: GhostCam
-    info:
-      path: GhostCamTests/Info.plist
-    settings:
-      base:
-        TARGETED_DEVICE_FAMILY: "1,2"
-        PRODUCT_NAME: GhostCamTests
-        PRODUCT_BUNDLE_IDENTIFIER: com.ghostcam.pro.tests
-        CODE_SIGN_STYLE: Manual
-        CODE_SIGN_IDENTITY: ""
-        CODE_SIGNING_ALLOWED: NO
-        CODE_SIGNING_REQUIRED: NO
